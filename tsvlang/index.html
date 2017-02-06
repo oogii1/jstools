@@ -1,1 +1,47 @@
-<div>HI GITHUB</div>
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div>
+        <div>
+            <textarea id="inputTSV" style="width:100%; height: 200px;"></textarea>
+        </div>
+        <div>
+            <button id="btnTSV2JSON">TSV2JSON</button>
+        </div>
+        <div>
+            <textarea id="outputJSON" style="width:100%; height: 200px;"></textarea>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#btnTSV2JSON').click(function () {
+                try {
+                    var inputTSV = $('#inputTSV').val();
+                    var rows = inputTSV.split('\n');
+                    var outputJSON = {};
+                    var columnRow = rows[0].split('\t');
+                    for (var i = 1, ic = columnRow.length; i < ic; i++) {
+                        var tmp = {};
+
+                        for (var j = 1, jc = rows.length; j < jc; j++) {
+                            var row = rows[j].split('\t');
+
+                            tmp[row[0]] = row[i];
+                        }
+                        outputJSON[columnRow[i]] = tmp;
+                    }
+                    $('#outputJSON').val(JSON.stringify(outputJSON));
+
+                } catch (exception) {
+                    alert(exception);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
