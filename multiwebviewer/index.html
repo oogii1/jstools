@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .page {
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+
+        #pages > iframe, #pages > div.page {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: none;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div id="pages">
+        <iframe src="http://zexy.mn/"></iframe>
+        <iframe src="http://mongoltravel3.mn/"></iframe>
+        <iframe src="https://mn.z24go.com"></iframe>
+        <div class="page" style="background-image:url(https://www.killping.com/blog/wp-content/uploads/2015/10/dota-2-reborn-lag.jpg)"></div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var currentIndex = 0;
+            var pages = $('#pages').children();
+            var changer = function () {
+                if (pages.length <= 0) return;
+                var nextIndex = currentIndex + 1;
+                if (nextIndex >= pages.length) nextIndex = 0;
+                $(pages[currentIndex]).fadeOut();
+                $(pages[nextIndex]).fadeIn();
+                currentIndex = nextIndex;
+            };
+            setInterval(changer, 10 * 1000);
+        });
+    </script>
+</body>
+</html>
